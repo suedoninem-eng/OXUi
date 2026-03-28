@@ -12,29 +12,51 @@ const WorkGallery = () => {
   const sectionRef = useRef(null)
   const containerRef = useRef(null)
   const [activeIndex, setActiveIndex] = useState(1)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
+    // Preload images to ensure correct width calculations
+    const loadImages = async () => {
+      const promises = projects.map(p => {
+        return new Promise((resolve, reject) => {
+          const img = new Image()
+          img.src = p.image
+          img.onload = resolve
+          img.onerror = resolve // Resolve anyway to not block
+        })
+      })
+      await Promise.all(promises)
+      setIsLoaded(true)
+    }
+    loadImages()
+  }, [])
+
+  useEffect(() => {
+    if (!isLoaded) return
+
     gsap.registerPlugin(ScrollTrigger)
 
     const ctx = gsap.context(() => {
       const container = containerRef.current
-      const sections = gsap.utils.toArray('.gallery-item')
+      if (!container) return
       
-      // Calculate total scrollable distance
-      // We move the container to the left by (totalWidth - viewportWidth)
-      const totalWidth = container.scrollWidth
-      const scrollDistance = totalWidth - window.innerWidth
+      const updateScrollDistance = () => {
+        const totalWidth = container.scrollWidth
+        const scrollDistance = totalWidth - window.innerWidth
+        return scrollDistance > 0 ? scrollDistance : 0
+      }
 
       gsap.to(container, {
-        x: -scrollDistance,
+        x: () => -updateScrollDistance(),
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
           scrub: 1,
-          end: () => `+=${totalWidth}`, // Smoothness based on content length
+          invalidateOnRefresh: true, // Crucial for mobile rotation/address bar
+          anticipatePin: 1,
+          end: () => `+=${container.scrollWidth}`,
           onUpdate: (self) => {
-            // Estimate active index based on scroll progress
             const index = Math.round(self.progress * (projects.length - 1)) + 1
             setActiveIndex(index)
           }
@@ -43,10 +65,19 @@ const WorkGallery = () => {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [])
+  }, [isLoaded])
 
   return (
-    <section ref={sectionRef} className="work-gallery-section" style={{ overflow: 'hidden', height: '100vh', background: '#000' }}>
+    <section 
+      ref={sectionRef} 
+      className="work-gallery-section" 
+      style={{ 
+        overflow: 'hidden', 
+        height: '100dvh', // Use dvh for mobile address bar stability
+        background: '#000',
+        visibility: isLoaded ? 'visible' : 'hidden' // Avoid layout jump
+      }}
+    >
       
       {/* PERSISTENT HEADER NAV */}
       <nav className="gallery-nav" style={{ 
@@ -61,32 +92,30 @@ const WorkGallery = () => {
       <div ref={containerRef} className="gallery-container" style={{ 
         display: 'flex', 
         height: '100%',
-        width: 'max-content', // Essential to let items define width
+        width: 'max-content',
         willChange: 'transform'
       }}>
         {projects.map((project) => (
           <div key={project.id} className="gallery-item" style={{ 
-            height: '100vh', 
+            height: '100dvh', 
             position: 'relative',
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
             overflow: 'hidden',
-            flexShrink: 0 // Prevent shrinking images
+            flexShrink: 0
           }}>
-            {/* REAL IMAGE TAG FOR DYNAMIC WIDTH */}
             <img 
               src={project.image} 
               alt="" 
               style={{ 
-                height: '100vh', 
+                height: '100dvh', 
                 width: 'auto', 
                 display: 'block',
-                objectFit: 'contain' // Ensures the image is not cropped
+                objectFit: 'contain',
+                maxWidth: 'none' // Ensure images don't shrink on mobile
               }} 
             />
-            
-            {/* Titles removed as per request */}
           </div>
         ))}
       </div>
