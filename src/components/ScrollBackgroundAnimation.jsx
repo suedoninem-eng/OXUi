@@ -63,13 +63,13 @@ const ScrollBackgroundAnimation = () => {
     updateCanvasSize()
     window.addEventListener('resize', updateCanvasSize)
 
-    // Animation: sync frames with scroll from .services to the end of the page
+    // Animation: sync frames from the end of the gallery to the end of page
     const st = ScrollTrigger.create({
-      trigger: '.services',
-      start: 'top bottom', // Start pre-calculating as it enters view
+      trigger: '.work-gallery-section',
+      start: 'bottom bottom', // Start exactly when the gallery vertical pin finishes
       endTrigger: 'html',
       end: 'bottom bottom',
-      scrub: 1, // Smooth scrolling transition
+      scrub: 1,
       onUpdate: (self) => {
         const frameIndex = Math.floor(self.progress * (frameCount - 1))
         if (animationState.current.frame !== frameIndex) {
@@ -79,14 +79,14 @@ const ScrollBackgroundAnimation = () => {
       }
     })
 
-    // Fade in effect when .services starts appearing
+    // Fade in effect starting when gallery is finishing
     gsap.set(canvas, { opacity: 0 })
     gsap.to(canvas, {
       opacity: 1,
       scrollTrigger: {
-        trigger: '.services',
-        start: 'top 80%', // Start fade in slightly before hitting the section
-        end: 'top 20%',
+        trigger: '.work-gallery-section',
+        start: 'bottom 80%', // Start fade in as the bottom of the gallery approach
+        end: 'bottom 20%',
         scrub: true
       }
     })
