@@ -63,10 +63,10 @@ const ScrollBackgroundAnimation = () => {
     updateCanvasSize()
     window.addEventListener('resize', updateCanvasSize)
 
-    // Animation: sync frames from the end of the gallery to the end of page
+    // Animation: sync frames from the moment Kinetic Grid (Conect Grid) ends
     const st = ScrollTrigger.create({
-      trigger: '.work-gallery-section',
-      start: 'bottom bottom', // Start exactly when the gallery vertical pin finishes
+      trigger: '.kinetic-grid-section',
+      start: 'bottom bottom', // Start exactly when the grid leaves the viewport
       endTrigger: 'html',
       end: 'bottom bottom',
       scrub: 1,
@@ -79,14 +79,14 @@ const ScrollBackgroundAnimation = () => {
       }
     })
 
-    // Fade in effect starting when gallery is finishing
+    // Fade in effect as we exit Kinetic Grid and enter Services
     gsap.set(canvas, { opacity: 0 })
     gsap.to(canvas, {
       opacity: 1,
       scrollTrigger: {
-        trigger: '.work-gallery-section',
-        start: 'bottom 80%', // Start fade in as the bottom of the gallery approach
-        end: 'bottom 20%',
+        trigger: '.kinetic-grid-section',
+        start: 'bottom bottom', 
+        end: 'bottom 20%', // Quick fade in as Services comes up
         scrub: true
       }
     })
@@ -111,7 +111,7 @@ const ScrollBackgroundAnimation = () => {
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: 0, // Above normal background elements, below content
+        zIndex: -1, // Use -1 to ensure it is behind all content (Services, etc.)
         pointerEvents: 'none',
         background: 'transparent'
       }}
