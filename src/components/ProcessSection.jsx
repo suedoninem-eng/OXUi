@@ -66,7 +66,7 @@ const ProcessSection = () => {
       <div className="process-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(250px, 1fr) 2fr', gap: '100px' }}>
         
         {/* Left Column: Metadata */}
-        <div ref={leftColRef} className="process-left" style={{ position: 'sticky', top: '120px', alignSelf: 'start' }}>
+        <div ref={leftColRef} className="process-left" style={{ alignSelf: 'start' }}>
           <div style={{ marginBottom: '60px' }}>
             <span style={{ fontSize: '0.8rem', letterSpacing: '0.2rem', color: 'var(--secondary-color)' }}>NOSSA ABORDAGEM</span>
             <h3 style={{ fontSize: '1.2rem', marginTop: '10px', fontWeight: 700 }}>METODOLOGIA</h3>

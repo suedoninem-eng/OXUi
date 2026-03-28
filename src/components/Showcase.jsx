@@ -43,19 +43,20 @@ const Showcase = () => {
       background: 'transparent',
       position: 'relative'
     }}>
-      <div ref={scrollRef} className="horizontal-scroll-wrapper" style={{ padding: '0 10vw', alignItems: 'center', height: '100vh' }}>
-        <div style={{ width: '40vw', flexShrink: 0 }}>
-          <h2 style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 900 }}>SELECTED<br/>CASES</h2>
+      <div ref={scrollRef} className="horizontal-scroll-wrapper" style={{ padding: '0 5vw', alignItems: 'center', height: '100vh', width: 'fit-content' }}>
+        <div style={{ width: 'clamp(200px, 80vw, 400px)', flexShrink: 0, paddingRight: '20px' }}>
+          <h2 style={{ fontSize: 'clamp(2rem, 12vw, 5rem)', fontWeight: 900, lineHeight: 1 }}>SELECTED<br/>CASES</h2>
         </div>
         
         {cases.map((item, index) => (
           <div key={index} className="scroll-item glass" style={{ 
             display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', 
-            padding: '40px', borderRadius: '20px', backgroundColor: item.color,
+            padding: '25px', borderRadius: '20px', backgroundColor: item.color,
+            width: 'clamp(280px, 85vw, 600px)',
             backgroundImage: `linear-gradient(45deg, ${item.color} 0%, rgba(255,255,255,0.05) 100%)`
           }}>
-            <span style={{ fontSize: '0.9rem', color: 'var(--secondary-color)', marginBottom: '10px' }}>{item.category}</span>
-            <h3 style={{ fontSize: '2rem', fontWeight: 700 }}>{item.title}</h3>
+            <span style={{ fontSize: '0.75rem', color: 'var(--secondary-color)', marginBottom: '10px' }}>{item.category}</span>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 6vw, 2rem)', fontWeight: 700 }}>{item.title}</h3>
           </div>
         ))}
       </div>

@@ -9,6 +9,10 @@
   --glass-border: rgba(255, 255, 255, 0.1);
   --font-main: 'Inter', sans-serif;
   --font-heading: 'Outfit', sans-serif;
+  
+  /* Spacing Tokens */
+  --section-padding-x: 5%;
+  --section-padding-y: 120px;
 }
 
 /* GLOBAL RESET FOR BACKGROUND VISIBILITY */
@@ -22,11 +26,16 @@ html {
   box-sizing: border-box;
 }
 
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
 body {
   background-color: transparent !important; /* Must be transparent to see z-index: -1 */
   color: var(--text-color);
   font-family: var(--font-main);
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -38,7 +47,7 @@ h1, h2, h3, h4 {
 
 .section {
   min-height: 100vh;
-  padding: 80px 5%;
+  padding: var(--section-padding-y) var(--section-padding-x);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -106,20 +115,68 @@ div:has(> a[href*="unicorn.studio"]) {
   z-index: 1 !important;
 }
 
-/* RESPONSIVE STYLES FOR PROCESS SECTION */
+/* MOBILE OPTIMIZATIONS */
 @media (max-width: 1024px) {
+  :root {
+    --section-padding-y: 80px;
+    --section-padding-x: 20px;
+  }
+
   .process-grid {
     grid-template-columns: 1fr !important;
-    gap: 40px !important;
+    gap: 60px !important;
   }
   
   .process-left {
     position: relative !important;
     top: 0 !important;
+    margin-bottom: 40px;
   }
   
   .process-right h2 {
-    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+    font-size: clamp(2.2rem, 10vw, 4rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  .process-right p {
+    font-size: 1.2rem !important;
+  }
+
+  /* Gallery specific adjustments */
+  .gallery-nav {
+    top: 20px !important;
+    gap: 20px !important;
+  }
+
+  .project-info {
+    padding: 0 20px;
+  }
+
+  .gallery-footer {
+    bottom: 20px !important;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Services responsiveness */
+  .services h2 {
+    margin-bottom: 40px !important;
+  }
+
+  /* CTA adjustments */
+  .cta button {
+    width: 100%;
+    padding: 16px 30px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 60px 20px;
+  }
+  
+  h1 {
+    font-size: clamp(2rem, 12vw, 4rem) !important;
   }
 }
 

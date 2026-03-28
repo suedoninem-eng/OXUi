@@ -148,9 +148,8 @@ const Manifesto = () => {
 
       {/* Sidebar Content */}
       <div className="manifesto-content" style={{ 
-        width: '40%', 
-        minWidth: '350px',
-        padding: '80px 10%',
+        width: 'clamp(300px, 40%, 600px)', 
+        padding: 'clamp(40px, 10vw, 80px) var(--section-padding-x)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -186,13 +185,15 @@ const Manifesto = () => {
         @media (max-width: 1024px) {
           .manifesto {
             flex-direction: column !important;
-            justify-content: flex-end !important;
-            min-height: 80vh !important;
+            justify-content: flex-start !important;
+            padding-top: 80px !important;
+            min-height: 100vh !important;
           }
           .manifesto-content {
             width: 100% !important;
-            padding: 40px 20px !important;
+            padding: 20px !important;
             text-align: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
           }
         }
       `}</style>
