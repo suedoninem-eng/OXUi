@@ -78,7 +78,7 @@ const KineticGrid = () => {
 
     const draw = () => {
       // Clear with black background (alpha false performance optimization)
-      ctx.fillStyle = '#101010'
+      ctx.fillStyle = '#000000'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
       // Draw mouse glow
@@ -150,7 +150,7 @@ const KineticGrid = () => {
         position: 'relative', 
         height: '80vh', 
         minHeight: '600px',
-        background: '#101010', 
+        background: '#000000', 
         overflow: 'hidden',
         borderTop: '1px solid rgba(255,255,255,0.05)',
         borderBottom: '1px solid rgba(255,255,255,0.05)'
@@ -175,33 +175,26 @@ const KineticGrid = () => {
         textAlign: 'center',
         pointerEvents: 'none',
         userSelect: 'none',
-        width: '100%'
+        width: '90%',               // Increased width for sentence
+        maxWidth: '1200px'
       }}>
-        <span style={{ 
-          fontSize: '0.8rem', 
-          fontWeight: 600, 
-          letterSpacing: '0.4rem', 
-          color: 'rgba(255,255,255,0.5)',
-          display: 'block',
-          marginBottom: '10px'
-        }}>
-          CORE SYSTEM
-        </span>
         <h2 style={{
-          fontSize: 'clamp(3rem, 12vw, 9rem)',
-          fontWeight: 900,
+          fontSize: 'clamp(1.5rem, 5vw, 4rem)',
+          fontWeight: 300,           // More elegant for a long phrase
           color: '#fff',
-          letterSpacing: '-0.04em',
+          letterSpacing: '-0.02em',
           margin: 0,
-          lineHeight: 0.85,
-          textTransform: 'uppercase'
+          lineHeight: 1.2,
+          textTransform: 'none'      // Use natural case
         }}>
-          KINETIC <br />
-          <span style={{
-            WebkitTextStroke: '1.5px rgba(255,255,255,0.8)',
-            color: 'transparent'
+          Transforme o toque em descoberta: <br />
+          <span style={{ 
+            fontWeight: 600, 
+            color: 'rgba(255,255,255,0.9)',
+            display: 'inline-block',
+            marginTop: '10px'
           }}>
-            GRID
+            um universo inteiro cabe no seu clique.
           </span>
         </h2>
       </div>

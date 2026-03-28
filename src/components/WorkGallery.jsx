@@ -120,27 +120,6 @@ const WorkGallery = () => {
         ))}
       </div>
 
-      {/* PAGINATION UI */}
-      <div className="gallery-footer" style={{ 
-        position: 'absolute', bottom: '40px', left: '5%', right: '5%', 
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 100 
-      }}>
-        <div className="pagination-numbers" style={{ flex: 1, textAlign: 'center', fontSize: '1rem', color: '#fff', fontWeight: 400 }}>
-          {activeIndex} — {projects.length}
-        </div>
-        
-        {/* MINI THUMBNAIL NAV */}
-        <div className="thumbnail-strip" style={{ display: 'flex', gap: '8px' }}>
-          {projects.map((p) => (
-            <div key={p.id} className={`thumb-item ${activeIndex === p.id ? 'active' : ''}`} style={{ 
-              width: '40px', height: '24px', backgroundImage: `url("${p.image}")`, 
-              backgroundSize: 'cover', border: activeIndex === p.id ? '1px solid #fff' : 'none',
-              opacity: activeIndex === p.id ? 1 : 0.3, transition: 'all 0.3s ease'
-            }} />
-          ))}
-        </div>
-      </div>
-
     </section>
   )
 }
