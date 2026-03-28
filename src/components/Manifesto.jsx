@@ -193,7 +193,7 @@ const Manifesto = () => {
             width: 100% !important;
             padding: 20px !important;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            background: transparent !important;
           }
         }
       `}</style>

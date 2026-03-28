@@ -152,12 +152,6 @@ div:has(> a[href*="unicorn.studio"]) {
     padding: 0 20px;
   }
 
-  .gallery-footer {
-    bottom: 20px !important;
-    flex-direction: column;
-    gap: 20px;
-  }
-
   /* Services responsiveness */
   .services h2 {
     margin-bottom: 40px !important;
@@ -194,14 +188,6 @@ div:has(> a[href*="unicorn.studio"]) {
   opacity: 1 !important;
 }
 
-.thumb-item {
-  cursor: pointer;
-}
-
-.thumb-item:hover {
-  opacity: 0.8 !important;
-  transform: scale(1.1);
-}
 
 .project-title {
   line-height: 1;

@@ -11,7 +11,6 @@ const projects = [
 const WorkGallery = () => {
   const sectionRef = useRef(null)
   const containerRef = useRef(null)
-  const [activeIndex, setActiveIndex] = useState(1)
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
@@ -56,10 +55,6 @@ const WorkGallery = () => {
           invalidateOnRefresh: true, // Crucial for mobile rotation/address bar
           anticipatePin: 1,
           end: () => `+=${container.scrollWidth}`,
-          onUpdate: (self) => {
-            const index = Math.round(self.progress * (projects.length - 1)) + 1
-            setActiveIndex(index)
-          }
         }
       })
     }, sectionRef)
