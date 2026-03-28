@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react'
 import Lenis from 'lenis'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 import CustomHeroBanner from '../components/CustomHeroBanner'
 import Manifesto from '../components/Manifesto'
 import ProcessSection from '../components/ProcessSection'
@@ -14,14 +18,25 @@ function Landing() {
   useEffect(() => {
     // Smooth Scroll Initialization
     const lenis = new Lenis()
+    
     function raf(time) {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
+    
+    // Sync ScrollTrigger with Lenis
+    lenis.on('scroll', ScrollTrigger.update)
+    
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+    
+    gsap.ticker.lagSmoothing(0)
     requestAnimationFrame(raf)
 
     return () => {
       lenis.destroy()
+      ScrollTrigger.refresh()
     }
   }, [])
 

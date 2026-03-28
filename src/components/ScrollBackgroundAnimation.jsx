@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -9,98 +9,119 @@ const ScrollBackgroundAnimation = () => {
   const frameCount = 41
   const images = useRef([])
   const animationState = useRef({ frame: 0 })
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const getFrameUrl = index => {
     const frameNumber = (index + 1).toString().padStart(3, '0')
     return `/background2/ezgif-frame-${frameNumber}.jpg`
   }
 
-  useEffect(() => {
+  const render = () => {
     const canvas = canvasRef.current
+    if (!canvas) return
     const context = canvas.getContext('2d')
+    const img = images.current[animationState.current.frame]
+    
+    if (img && img.complete) {
+      context.clearRect(0, 0, canvas.width, canvas.height)
+      
+      const canvasAspect = canvas.width / canvas.height
+      const imageAspect = img.width / img.height
+      let drawWidth, drawHeight, offsetX, offsetY
 
-    const updateCanvasSize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-      render()
+      if (canvasAspect > imageAspect) {
+        drawWidth = canvas.width
+        drawHeight = canvas.width / imageAspect
+        offsetX = 0
+        offsetY = (canvas.height - drawHeight) / 2
+      } else {
+        drawWidth = canvas.height * imageAspect
+        drawHeight = canvas.height
+        offsetX = (canvas.width - drawWidth) / 2
+        offsetY = 0
+      }
+
+      context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
     }
+  }
 
-    const preloadImages = () => {
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = []
       for (let i = 0; i < frameCount; i++) {
         const img = new Image()
         img.src = getFrameUrl(i)
-        // Store the promise to know when it's ready, though we check .complete in render
         images.current[i] = img
+        promises.push(new Promise(resolve => {
+          img.onload = resolve
+          img.onerror = resolve
+        }))
       }
-    }
-
-    const render = () => {
-      const img = images.current[animationState.current.frame]
-      if (img && img.complete) {
-        context.clearRect(0, 0, canvas.width, canvas.height)
-        
-        const canvasAspect = canvas.width / canvas.height
-        const imageAspect = img.width / img.height
-        let drawWidth, drawHeight, offsetX, offsetY
-
-        if (canvasAspect > imageAspect) {
-          drawWidth = canvas.width
-          drawHeight = canvas.width / imageAspect
-          offsetX = 0
-          offsetY = (canvas.height - drawHeight) / 2
-        } else {
-          drawWidth = canvas.height * imageAspect
-          drawHeight = canvas.height
-          offsetX = (canvas.width - drawWidth) / 2
-          offsetY = 0
-        }
-
-        context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
-      }
+      await Promise.all(promises)
+      setIsLoaded(true)
     }
 
     preloadImages()
-    updateCanvasSize()
-    window.addEventListener('resize', updateCanvasSize)
 
-    // Animation: sync frames from the moment Services (Soluções) appears
-    const st = ScrollTrigger.create({
-      trigger: '.services',
-      start: 'top bottom', // Start exactly when the solutions section enters from bottom
-      endTrigger: 'html',
-      end: 'bottom bottom',
-      scrub: true, // Immediate response for better frame precision
-      onUpdate: (self) => {
-        const frameIndex = Math.floor(self.progress * (frameCount - 1))
-        if (animationState.current.frame !== frameIndex) {
-          animationState.current.frame = frameIndex
-          render()
-        }
+    const updateCanvasSize = () => {
+      const canvas = canvasRef.current
+      if (canvas) {
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        render()
       }
-    })
-
-    // Fade in effect as we enter Services
-    gsap.set(canvas, { opacity: 0 })
-    gsap.to(canvas, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: '.services',
-        start: 'top bottom', 
-        end: 'top 30%', // Smooth fade in as the section fills the screen
-        scrub: true
-      }
-    })
-
-    // Make sure we render the first frame once loaded
-    if (images.current[0]) {
-      images.current[0].onload = render
     }
+
+    window.addEventListener('resize', updateCanvasSize)
+    updateCanvasSize()
 
     return () => {
       window.removeEventListener('resize', updateCanvasSize)
-      st.kill()
     }
   }, [])
+
+  useEffect(() => {
+    if (!isLoaded) return
+
+    // Initial render
+    render()
+    
+    // Force a refresh to account for pinned sections above
+    ScrollTrigger.refresh()
+
+    const ctx = gsap.context(() => {
+      // Animation: sync frames from the moment Services (Soluções) appears
+      ScrollTrigger.create({
+        trigger: '.services',
+        start: 'top bottom',
+        endTrigger: 'html',
+        end: 'bottom bottom',
+        scrub: true,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const frameIndex = Math.floor(self.progress * (frameCount - 1))
+          if (animationState.current.frame !== frameIndex) {
+            animationState.current.frame = frameIndex
+            render()
+          }
+        }
+      })
+
+      // Fade in effect
+      gsap.set(canvasRef.current, { opacity: 0 })
+      gsap.to(canvasRef.current, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: '.services',
+          start: 'top bottom',
+          end: 'top 30%',
+          scrub: true
+        }
+      })
+    })
+
+    return () => ctx.revert()
+  }, [isLoaded])
 
   return (
     <canvas
@@ -111,7 +132,7 @@ const ScrollBackgroundAnimation = () => {
         left: 0,
         width: '100%',
         height: '100%',
-        zIndex: -1, // Use -1 to ensure it is behind all content (Services, etc.)
+        zIndex: -1,
         pointerEvents: 'none',
         background: 'transparent'
       }}
