@@ -63,13 +63,13 @@ const ScrollBackgroundAnimation = () => {
     updateCanvasSize()
     window.addEventListener('resize', updateCanvasSize)
 
-    // Animation: sync frames from the moment Kinetic Grid (Conect Grid) ends
+    // Animation: sync frames from the moment Services (Soluções) appears
     const st = ScrollTrigger.create({
-      trigger: '.kinetic-grid-section',
-      start: 'bottom bottom', // Start exactly when the grid leaves the viewport
+      trigger: '.services',
+      start: 'top bottom', // Start exactly when the solutions section enters from bottom
       endTrigger: 'html',
       end: 'bottom bottom',
-      scrub: 1,
+      scrub: true, // Immediate response for better frame precision
       onUpdate: (self) => {
         const frameIndex = Math.floor(self.progress * (frameCount - 1))
         if (animationState.current.frame !== frameIndex) {
@@ -79,14 +79,14 @@ const ScrollBackgroundAnimation = () => {
       }
     })
 
-    // Fade in effect as we exit Kinetic Grid and enter Services
+    // Fade in effect as we enter Services
     gsap.set(canvas, { opacity: 0 })
     gsap.to(canvas, {
       opacity: 1,
       scrollTrigger: {
-        trigger: '.kinetic-grid-section',
-        start: 'bottom bottom', 
-        end: 'bottom 20%', // Quick fade in as Services comes up
+        trigger: '.services',
+        start: 'top bottom', 
+        end: 'top 30%', // Smooth fade in as the section fills the screen
         scrub: true
       }
     })
