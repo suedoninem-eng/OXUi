@@ -16,26 +16,38 @@ import CTA from '../components/CTA'
 
 function Landing() {
   useEffect(() => {
+    // ScrollTrigger Config for global mobile stability
+    ScrollTrigger.config({
+      ignoreMobileResize: true // Previne saltos quando a barra do navegador mobile sobe/desce
+    })
+
     // Smooth Scroll Initialization
-    const lenis = new Lenis()
-    
-    function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
-    }
+    const lenis = new Lenis({
+      lerp: 0.1,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      smoothWheel: true
+    })
     
     // Sync ScrollTrigger with Lenis
     lenis.on('scroll', ScrollTrigger.update)
     
-    gsap.ticker.add((time) => {
+    const ticker = (time) => {
       lenis.raf(time * 1000)
-    })
+    }
     
+    gsap.ticker.add(ticker)
     gsap.ticker.lagSmoothing(0)
-    requestAnimationFrame(raf)
+
+    // Force a full refresh after a small delay to catch all late-loading components
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 1000)
 
     return () => {
+      gsap.ticker.remove(ticker)
       lenis.destroy()
+      clearTimeout(timer)
       ScrollTrigger.refresh()
     }
   }, [])

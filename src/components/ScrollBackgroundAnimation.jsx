@@ -90,6 +90,12 @@ const ScrollBackgroundAnimation = () => {
     ScrollTrigger.refresh()
 
     const ctx = gsap.context(() => {
+      // Hide initially and only show when relevant
+      gsap.set(canvasRef.current, { 
+        opacity: 0,
+        visibility: 'hidden'
+      })
+
       // Animation: sync frames from the moment Services (Soluções) appears
       ScrollTrigger.create({
         trigger: '.services',
@@ -99,28 +105,41 @@ const ScrollBackgroundAnimation = () => {
         scrub: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          const frameIndex = Math.floor(self.progress * (frameCount - 1))
-          if (animationState.current.frame !== frameIndex) {
-            animationState.current.frame = frameIndex
-            render()
+          // Only render if significantly visible (optimization)
+          if (self.progress > 0) {
+            const frameIndex = Math.floor(self.progress * (frameCount - 1))
+            if (animationState.current.frame !== frameIndex) {
+              animationState.current.frame = frameIndex
+              render()
+            }
           }
         }
       })
 
       // Fade in effect
-      gsap.set(canvasRef.current, { opacity: 0 })
       gsap.to(canvasRef.current, {
         opacity: 1,
+        visibility: 'visible',
         scrollTrigger: {
           trigger: '.services',
           start: 'top bottom',
           end: 'top 30%',
-          scrub: true
+          scrub: true,
+          onEnter: () => gsap.set(canvasRef.current, { visibility: 'visible' }),
+          onLeaveBack: () => gsap.set(canvasRef.current, { visibility: 'hidden' })
         }
       })
     })
 
-    return () => ctx.revert()
+    // Final refresh trigger
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 500)
+
+    return () => {
+      ctx.revert()
+      clearTimeout(refreshTimer)
+    }
   }, [isLoaded])
 
   return (
