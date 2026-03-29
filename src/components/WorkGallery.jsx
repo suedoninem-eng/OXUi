@@ -3,9 +3,9 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const projects = [
-  { id: 1, title: '', category: '', image: '/BANNERS/Prancheta 1.png' },
-  { id: 2, title: '', category: '', image: '/BANNERS/Prancheta 2.png' },
-  { id: 3, title: '', category: '', image: '/BANNERS/Prancheta 6.png' },
+  { id: 1, title: '', category: '', image: '/BANNERS/Prancheta 1.jpg' },
+  { id: 2, title: '', category: '', image: '/BANNERS/Prancheta 2.jpg' },
+  { id: 3, title: '', category: '', image: '/BANNERS/Prancheta 6.jpg' },
 ]
 
 const WorkGallery = () => {
