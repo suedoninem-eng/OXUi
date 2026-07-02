@@ -69,6 +69,7 @@ export default function EcosystemSection({ isMobile }) {
         {!isMobile && (
           <video
             src="/conteudospaginaia/videofundo2/videocoluna2-fast.mp4"
+            poster="/conteudospaginaia/videofundo2/videocoluna2-poster.jpg"
             autoPlay
             loop
             muted
