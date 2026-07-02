@@ -60,21 +60,23 @@ const TiltCard = ({ title, highlight, logos, description }) => {
   );
 };
 
-export default function EcosystemSection() {
+export default function EcosystemSection({ isMobile }) {
   return (
     <section className="via-eco-section">
 
-      {/* ── Vídeo de Fundo ─────────────────────────────── */}
+      {/* ── Vídeo de Fundo (omitido no celular para performance) ─────────────────────────────── */}
       <div className="via-eco-video-bg">
-        <video
-          src="/conteudospaginaia/videofundo2/videocoluna2.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="via-eco-video-el"
-          aria-hidden="true"
-        />
+        {!isMobile && (
+          <video
+            src="/conteudospaginaia/videofundo2/videocoluna2.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="via-eco-video-el"
+            aria-hidden="true"
+          />
+        )}
         <div className="via-eco-video-overlay" />
       </div>
 

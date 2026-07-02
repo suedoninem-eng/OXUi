@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import './VideoIA.css'
-import FloatingGLB from '../components/FloatingGLB'
 import VideoCard from '../components/VideoCard'
 import EcosystemSection from '../components/EcosystemSection'
 import BudgetCalculator from '../components/BudgetCalculator'
 import { gsap } from 'gsap'
+
+// Importação dinâmica: o Three.js só será baixado se o componente for montado
+const FloatingGLB = lazy(() => import('../components/FloatingGLB'))
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { IconGemini, IconClaude, IconSpark, IconCheck, IconArrow } from '../components/Icons'
 
@@ -23,6 +25,15 @@ export default function VideoIA() {
   const mosaicSectionRef = useRef(null)
   const trackRef = useRef(null)
   const [visibleSections, setVisibleSections] = useState(new Set())
+
+  // Controla se é mobile (para não carregar recursos pesados)
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Controla visibilidade do mascote 3D (só na seção Design-Driven)
   const [mascoteVisible, setMascoteVisible] = useState(false)
@@ -129,8 +140,12 @@ export default function VideoIA() {
 
   return (
     <div className="via-page">
-      {/* ── Mascote 3D flutuante (Canvas transparente, fixed) ── */}
-      <FloatingGLB visible={mascoteVisible} />
+      {/* ── Mascote 3D flutuante (Apenas no Desktop via Lazy Load) ── */}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <FloatingGLB visible={mascoteVisible} />
+        </Suspense>
+      )}
 
       {/* ── Grain overlay ────────────────────────────────────── */}
       <div className="via-grain" aria-hidden="true"/>
@@ -253,7 +268,7 @@ export default function VideoIA() {
       {/* ══════════════════════════════════════════════════════════════
           ECOSSISTEMA DIGITAL (Cards 3D e Glassmorphism)
       ══════════════════════════════════════════════════════════════ */}
-      <EcosystemSection />
+      <EcosystemSection isMobile={isMobile} />
 
       {/* ══════════════════════════════════════════════════════════════
           CALCULADORA DE ORÇAMENTO
