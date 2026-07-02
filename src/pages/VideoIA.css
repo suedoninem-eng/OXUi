@@ -514,8 +514,10 @@
   }
   
   .via-mosaic-text-wrapper {
-    width: 100%;
+    width: 85vw;
+    max-width: 100%;
     text-align: center;
+    padding: 0 15px;
   }
   
   .via-mosaic-desc {
@@ -531,7 +533,18 @@
 
 @media (max-width: 768px) {
   .via-mosaic-title {
-    font-size: clamp(3.5rem, 12vw, 5rem);
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    line-height: 1;
+  }
+  
+  .via-mosaic-desc {
+    font-size: clamp(0.9rem, 4vw, 1.1rem);
+    margin-top: 16px;
+  }
+
+  .via-mosaic-subtitle {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin-top: 20px;
   }
   
   .via-mosaic-video-wrapper {
