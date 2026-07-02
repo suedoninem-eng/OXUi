@@ -68,7 +68,7 @@ export default function EcosystemSection({ isMobile }) {
       <div className="via-eco-video-bg">
         {!isMobile && (
           <video
-            src="/conteudospaginaia/videofundo2/videocoluna2.mp4"
+            src="/conteudospaginaia/videofundo2/videocoluna2-fast.mp4"
             autoPlay
             loop
             muted
