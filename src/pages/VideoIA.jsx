@@ -327,7 +327,7 @@ export default function VideoIA() {
           {/* CTAs */}
           <div className="via-cta-final__actions">
             <a
-              href="https://wa.me/5500000000000?text=Ol%C3%A1%20Sued%2C%20quero%20criar%20um%20v%C3%ADdeo%20com%20IA!"
+              href="https://wa.me/5545998522258?text=Ol%C3%A1%20Sued%2C%20quero%20criar%20um%20v%C3%ADdeo%20com%20IA!"
               target="_blank"
               rel="noreferrer"
               className="via-cta-final__btn via-cta-final__btn--primary"
@@ -370,7 +370,7 @@ export default function VideoIA() {
           </span>
           <div className="via-footer-new__links">
             <a href="https://suedoninem.pro" target="_blank" rel="noreferrer">suedoninem.pro</a>
-            <a href="https://wa.me/5500000000000" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a href="https://wa.me/5545998522258" target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
         </div>
       </footer>
