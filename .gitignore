@@ -11,3 +11,11 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Pastas de mídia local — não enviadas ao GitHub
+BANNERS/
+IMAGENS/
+VIDEO/
+referencia/
+public/VIDEO/
+public/portfolio/

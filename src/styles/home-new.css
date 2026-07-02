@@ -1,0 +1,1580 @@
+/* Kallisto vem do index.css global — apenas Inter aqui */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════════════════
+   SISTEMA DE DESIGN — ESTÉTICA EDITORIAL CONSERVADORA
+   Paradigma: Consultoria financeira secular. Zero frivolidade.
+   Monocromático. O negativo é o luxo. A tipografia é o design.
+═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── IDENTIDADE DARK + LIME — alinhada ao ecossistema ── */
+  --nh-parchment:      #000000;    /* Fundo principal — preto absoluto */
+  --nh-parchment-2:    #080808;    /* Fundo secundário */
+  --nh-parchment-3:    #111111;    /* Superfície de cards */
+
+  --nh-ink:            #ffffff;    /* Texto principal — branco puro */
+  --nh-ink-secondary:  #cccccc;    /* Texto secundário */
+  --nh-ink-muted:      rgba(255,255,255,0.48); /* Texto de suporte */
+  --nh-ink-faint:      rgba(255,255,255,0.18); /* Placeholders / decorações */
+
+  --nh-rule:           rgba(255,255,255,0.07); /* Divisores hairline */
+  --nh-rule-accent:    rgba(255,255,255,0.12); /* Divisores de ênfase */
+
+  /* Acento — Lime neon (uso cirúrgico) */
+  --nh-accent:         #C5FF00;    /* Lime — identidade global */
+  --nh-accent-dim:     rgba(197,255,0,0.12);
+  --nh-accent-border:  rgba(197,255,0,0.35);
+
+  /* Tipografia — Kallisto como heading, Inter como body */
+  --nh-serif:          'Kallisto', 'Barlow Condensed', sans-serif;
+  --nh-sans:           'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Espaçamento */
+  --nh-section-y:      160px;
+  --nh-section-x:      max(40px, 4vw);
+  --nh-max-w:          1280px;
+
+  /* Transições */
+  --nh-ease:           cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ───────────────────────────────────────────────────────────
+   RESET
+─────────────────────────────────────────────────────────── */
+.nh-root *,
+.nh-root *::before,
+.nh-root *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.nh-root {
+  background:   var(--nh-parchment);
+  color:        var(--nh-ink);
+  font-family:  var(--nh-sans);
+  overflow-x:   hidden;
+  /* Dark absoluto. O vazio é o luxo. A tipografia é o design. */
+}
+
+.nh-container {
+  max-width: var(--nh-max-w);
+  margin:    0 auto;
+  padding:   0 var(--nh-section-x);
+}
+
+/* ───────────────────────────────────────────────────────────
+   ELEMENTOS TIPOGRÁFICOS GLOBAIS
+─────────────────────────────────────────────────────────── */
+.nh-label {
+  display:        block;
+  font-family:    var(--nh-sans);
+  font-size:      9.5px;
+  font-weight:    600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+  margin-bottom:  20px;
+}
+
+.nh-rule-h {
+  display:    block;
+  width:      100%;
+  height:     1px;
+  background: var(--nh-rule);
+  margin:     0;
+}
+
+.nh-rule-h--accent {
+  background: var(--nh-rule-accent);
+}
+
+/* ───────────────────────────────────────────────────────────
+   SEÇÃO 1 — HERO / ABOVE THE FOLD
+   Paradigma: Uma capa de anuário de banco suíço.
+   Nenhum efeito. A hierarquia tipográfica faz todo o trabalho.
+─────────────────────────────────────────────────────────── */
+.nh-hero {
+  background:     var(--nh-parchment);
+  min-height:     100vh;
+  display:        flex;
+  flex-direction: column;
+  position:       relative;
+  border-bottom:  1px solid var(--nh-rule);
+  overflow:       hidden;
+}
+
+/* Grid Editorial Minimalista de Fundo */
+.nh-hero-grid {
+  position:       absolute;
+  top:            0;
+  left:           50%;
+  transform:      translateX(-50%);
+  width:          100%;
+  max-width:      var(--nh-max-w);
+  height:         100%;
+  padding:        0 var(--nh-section-x);
+  display:        grid;
+  grid-template-columns: repeat(4, 1fr);
+  pointer-events: none;
+  z-index:        1;
+}
+
+.nh-grid-col {
+  border-left:    1px solid rgba(197,255,0,0.04); /* Linha lime ultra-fina */
+  height:         100%;
+}
+
+.nh-grid-col:last-child {
+  border-right:   1px solid rgba(197,255,0,0.04);
+}
+
+.nh-hero-nav {
+  padding:         36px var(--nh-section-x);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  border-bottom:   1px solid var(--nh-rule);
+  position:        relative;
+  z-index:         2;
+}
+
+.nh-hero-nav-brand {
+  font-family:    var(--nh-serif);
+  font-style:     italic;
+  font-weight:    700;
+  font-size:      1.2rem;
+  color:          var(--nh-ink);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nh-hero-nav-meta {
+  font-size:      9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+}
+
+.nh-hero-body {
+  flex:            1;
+  display:         flex;
+  flex-direction:  column;
+  justify-content: center;
+  align-items:     center;
+  text-align:      center;
+  padding:         var(--nh-section-y) var(--nh-section-x) 80px;
+  max-width:       var(--nh-max-w);
+  margin:          0 auto;
+  width:           100%;
+  position:        relative;
+  z-index:         2;
+}
+
+.nh-hero-kicker {
+  display:        flex;
+  align-items:    center;
+  gap:            16px;
+  margin-bottom:  56px;
+}
+
+.nh-hero-kicker-line {
+  display:    block;
+  width:      32px;
+  height:     1px;
+  background: var(--nh-ink-muted);
+  flex-shrink: 0;
+}
+
+.nh-hero-kicker-text {
+  font-size:      9.5px;
+  font-weight:    600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+}
+
+/* H1 — Kallisto Medium Italic. Grande. Impactante. Higgsfield-inspired. */
+.nh-hero-h1 {
+  font-family:    var(--nh-serif);
+  font-style:     italic;
+  font-weight:    700;
+  font-size:      clamp(3.2rem, 7.5vw, 8rem);
+  line-height:    0.9;
+  letter-spacing: -0.02em;
+  color:          var(--nh-ink);
+  margin-bottom:  56px;
+  max-width:      960px;
+  text-transform: uppercase;
+}
+
+.nh-hero-h1 em {
+  font-style:  italic;
+  font-weight: 700;
+  color:       var(--nh-accent); /* lime no destaque */
+}
+
+/* Linha divisória entre H1 e conteúdo inferior */
+.nh-hero-divider {
+  display:       grid;
+  grid-template-columns: 1fr 1fr;
+  gap:           80px;
+  padding-top:   48px;
+  border-top:    1px solid var(--nh-rule-accent);
+  margin-bottom: 72px;
+  text-align:    left;
+  width:         100%;
+}
+
+.nh-hero-sub {
+  font-family: var(--nh-sans);
+  font-size:   0.95rem;
+  font-weight: 400;
+  line-height: 1.72;
+  color:       var(--nh-ink-muted);
+}
+
+.nh-hero-trust-block {}
+
+.nh-hero-trust-block p {
+  font-family: var(--nh-sans);
+  font-size:   0.78rem;
+  font-weight: 400;
+  line-height: 1.78;
+  color:       var(--nh-ink-muted);
+  padding-left: 20px;
+  border-left:  1px solid var(--nh-rule-accent);
+}
+
+/* CTA area */
+.nh-hero-cta-row {
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  gap:         48px;
+  width:       100%;
+}
+
+.nh-btn-primary {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             14px;
+  background:      var(--nh-accent);
+  color:           #000000;
+  font-family:     var(--nh-sans);
+  font-size:       9.5px;
+  font-weight:     700;
+  letter-spacing:  0.22em;
+  text-transform:  uppercase;
+  padding:         18px 36px;
+  border:          1.8px solid var(--nh-accent);
+  border-radius:   6px;
+  cursor:          pointer;
+  text-decoration: none;
+  transition:      all 0.35s var(--nh-ease);
+}
+
+.nh-btn-primary:hover {
+  background:  transparent;
+  color:       var(--nh-accent);
+  box-shadow:  0 0 32px rgba(197,255,0,0.25);
+}
+
+.nh-btn-arrow {
+  width:      14px;
+  height:     14px;
+  transition: transform 0.4s var(--nh-ease);
+  flex-shrink: 0;
+}
+
+.nh-btn-primary:hover .nh-btn-arrow {
+  transform: translateX(5px);
+}
+
+.nh-hero-scroll-signal {
+  font-size:      9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  display:        flex;
+  flex-direction: column;
+  align-items:    center;
+  gap:            10px;
+}
+
+.nh-hero-scroll-signal::before {
+  content:    '';
+  display:    block;
+  width:      1px;
+  height:     40px;
+  background: var(--nh-ink-faint);
+  /* Sem animação. O silêncio é intencional. */
+}
+
+/* Rodapé do hero — dados institucionais */
+.nh-hero-foot {
+  border-top: 1px solid var(--nh-rule);
+  position:   relative;
+  z-index:    2;
+}
+
+.nh-hero-foot-inner {
+  max-width:       var(--nh-max-w);
+  margin:          0 auto;
+  padding:         24px var(--nh-section-x);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+}
+
+.nh-hero-stats {
+  display: flex;
+  gap:     60px;
+}
+
+.nh-hero-stat {}
+
+.nh-hero-stat-value {
+  display:     block;
+  font-family: var(--nh-serif);
+  font-size:   1.6rem;
+  font-weight: 600;
+  color:       var(--nh-ink);
+  line-height: 1.1;
+}
+
+.nh-hero-stat-label {
+  display:        block;
+  font-size:      9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  margin-top:     3px;
+}
+
+.nh-hero-foot-notice {
+  font-size:      9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+}
+
+/* ───────────────────────────────────────────────────────────
+   SEÇÃO 2 — DOR SILENCIOSA
+─────────────────────────────────────────────────────────── */
+.nh-pain {
+  background: var(--nh-parchment);
+  padding:    var(--nh-section-y) 0;
+  border-bottom: 1px solid var(--nh-rule);
+}
+
+.nh-pain-top {
+  padding-bottom: 80px;
+  margin-bottom:  80px;
+  border-bottom:  1px solid var(--nh-rule);
+}
+
+.nh-pain-h2 {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(2.8rem, 5.5vw, 6rem);
+  line-height:    0.96;
+  letter-spacing: -0.025em;
+  color:          var(--nh-ink);
+  max-width:      820px;
+}
+
+.nh-pain-h2 em {
+  font-style: italic;
+}
+
+.nh-pain-body {
+  display:               grid;
+  grid-template-columns: 5fr 7fr;
+  gap:                   120px;
+  align-items:           start;
+}
+
+.nh-pain-copy {
+  font-family: var(--nh-sans);
+  font-size:   0.95rem;
+  font-weight: 400;
+  line-height: 1.78;
+  color:       var(--nh-ink-muted);
+}
+
+.nh-pain-bullets {
+  display:        flex;
+  flex-direction: column;
+}
+
+.nh-pain-bullet {
+  display:       flex;
+  gap:           28px;
+  padding:       32px 0;
+  border-bottom: 1px solid var(--nh-rule);
+  align-items:   flex-start;
+  transition:    border-color 0.3s ease;
+  cursor:        default;
+}
+
+.nh-pain-bullet:first-child {
+  border-top: 1px solid var(--nh-rule);
+}
+
+.nh-pain-bullet:hover {
+  border-bottom-color: var(--nh-rule-accent);
+}
+
+.nh-pain-bullet-num {
+  font-family:    var(--nh-serif);
+  font-size:      0.72rem;
+  font-weight:    400;
+  font-style:     italic;
+  color:          var(--nh-ink-faint);
+  flex-shrink:    0;
+  width:          24px;
+  padding-top:    3px;
+}
+
+.nh-pain-bullet-text {
+  font-family: var(--nh-sans);
+  font-size:   0.88rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color:       var(--nh-ink-muted);
+  transition:  color 0.3s ease;
+}
+
+.nh-pain-bullet:hover .nh-pain-bullet-text {
+  color: var(--nh-ink-secondary);
+}
+
+/* ──────────────────────────────────────────────────────
+   SEÇÃO 3 — SERVIÇOS (STICKY STACKING — CSS NATIVO)
+   position: sticky real. Sem dependência de GSAP pin.
+────────────────────────────────────────────────────── */
+.nh-services {
+  border-bottom: 1px solid var(--nh-rule);
+}
+
+.nh-services-header {
+  padding:        var(--nh-section-y) 0 80px;
+  border-bottom:  1px solid var(--nh-rule);
+  background:     var(--nh-parchment-2);
+}
+
+.nh-services-h2 {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(2.5rem, 5vw, 5.5rem);
+  line-height:    0.96;
+  letter-spacing: -0.025em;
+  color:          var(--nh-ink);
+  max-width:      800px;
+}
+
+.nh-services-h2 em { font-style: italic; }
+
+/* Stack wrapper */
+.nh-services-stack {
+  position: relative;
+}
+
+/* O coração do efeito: cada card fica sticky no topo */
+.nh-svc-card {
+  position:      sticky;
+  top:           0;
+  min-height:    100vh;
+  display:       flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid var(--nh-rule);
+  overflow:      hidden;
+  /* Sombra sutil no topo para dar profundidade ao empilhamento */
+  box-shadow:    0 -8px 40px rgba(10,9,8,0.06);
+}
+
+/* Número gigante de fundo — decorativo */
+.nh-svc-num {
+  position:       absolute;
+  right:          -2vw;
+  bottom:         -0.1em;
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(14rem, 28vw, 36rem);
+  line-height:    0.8;
+  letter-spacing: -0.04em;
+  pointer-events: none;
+  user-select:    none;
+  z-index:        0;
+}
+
+/* Layout interno do card */
+.nh-svc-card-inner {
+  display:               grid;
+  grid-template-columns: 1fr 1fr;
+  gap:                   100px;
+  align-items:           center;
+  padding:               80px 0;
+  position:              relative;
+  z-index:               1;
+}
+
+/* Linha de meta — número/índice + preço */
+.nh-svc-meta-row {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  border-bottom:   1px solid var(--nh-rule);
+  padding-bottom:  20px;
+  margin-bottom:   4px;
+}
+
+.nh-svc-index-label {
+  font-family:    var(--nh-serif);
+  font-size:      0.85rem;
+  font-weight:    300;
+  font-style:     italic;
+  color:          var(--nh-ink-faint);
+  letter-spacing: 0.02em;
+}
+
+.nh-svc-price {
+  font-size:      0.65rem;
+  font-weight:    600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+}
+
+/* Lado esquerdo */
+.nh-svc-left {
+  display:        flex;
+  flex-direction: column;
+  gap:            32px;
+}
+
+.nh-svc-name {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(2.4rem, 4vw, 4rem);
+  line-height:    0.98;
+  letter-spacing: -0.025em;
+  color:          var(--nh-ink);
+}
+
+.nh-svc-copy {
+  font-size:   0.92rem;
+  line-height: 1.82;
+  color:       var(--nh-ink-secondary);
+  max-width:   480px;
+}
+
+.nh-svc-cta {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             14px;
+  font-size:       9.5px;
+  font-weight:     600;
+  letter-spacing:  0.22em;
+  text-transform:  uppercase;
+  color:           var(--nh-ink);
+  text-decoration: none;
+  border-bottom:   1px solid var(--nh-rule-accent);
+  padding-bottom:  8px;
+  width:           fit-content;
+  transition:      gap 0.35s var(--nh-ease), border-color 0.3s ease;
+}
+
+.nh-svc-cta:hover {
+  gap:          22px;
+  border-color: var(--nh-ink);
+}
+
+/* Lado direito — badges de escopo */
+.nh-svc-right {
+  display:        flex;
+  flex-direction: column;
+  gap:            28px;
+  padding:        48px;
+  border:         1px solid var(--nh-rule);
+  background:     rgba(255,255,255,0.25);
+  backdrop-filter: blur(4px);
+}
+
+.nh-svc-badge-label {
+  font-size:      8px;
+  font-weight:    600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+  border-bottom:  1px solid var(--nh-rule);
+  padding-bottom: 14px;
+}
+
+.nh-svc-badges {
+  display:  flex;
+  flex-wrap: wrap;
+  gap:      10px;
+}
+
+.nh-svc-badge {
+  display:        inline-block;
+  font-size:      8.5px;
+  font-weight:    500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-secondary);
+  border:         1px solid var(--nh-rule-accent);
+  border-radius:  100px;
+  padding:        7px 16px;
+  transition:     all 0.25s ease;
+  cursor:         default;
+}
+
+.nh-svc-badge:hover {
+  background:   var(--nh-ink);
+  color:        var(--nh-parchment);
+  border-color: var(--nh-ink);
+}
+
+/* ───────────────────────────────────────────────────────────
+   SEÇÃO 4 — PORTFÓLIO BLINDADO
+─────────────────────────────────────────────────────────── */
+.nh-portfolio {
+  background:    var(--nh-parchment);
+  padding:       var(--nh-section-y) 0;
+  border-bottom: 1px solid var(--nh-rule);
+}
+
+.nh-portfolio-header {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     flex-end;
+  padding-bottom:  80px;
+  border-bottom:   1px solid var(--nh-rule);
+  margin-bottom:   80px;
+}
+
+.nh-portfolio-h2 {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(3.5rem, 7vw, 8rem);
+  line-height:    0.92;
+  letter-spacing: -0.03em;
+  color:          var(--nh-ink);
+}
+
+.nh-portfolio-h2 em {
+  font-style: italic;
+}
+
+.nh-portfolio-tagline {
+  max-width:   360px;
+  font-size:   0.85rem;
+  line-height: 1.72;
+  color:       var(--nh-ink-muted);
+  text-align:  right;
+}
+
+/* Card de Produto/Projeto Estilo Academy Pass */
+.nh-prod-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--nh-rule-accent);
+  background: var(--nh-parchment-2);
+  margin-bottom: 0;
+}
+
+/* Lado Esquerdo - Visual Mockup */
+.nh-prod-card-media {
+  position: relative;
+  overflow: hidden;
+  background: var(--nh-parchment-3);
+  border-right: 1px solid var(--nh-rule-accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.nh-mockup-chrome {
+  background: var(--nh-parchment-2);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--nh-rule);
+  z-index: 10;
+}
+
+.nh-mockup-chrome-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.nh-mockup-chrome-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--nh-ink-faint);
+}
+
+.nh-mockup-chrome-url {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nh-mockup-chrome-url span {
+  background: var(--nh-parchment);
+  border: 1px solid var(--nh-rule);
+  padding: 3px 24px;
+  border-radius: 2px;
+  font-size: 0.62rem;
+  color: var(--nh-ink-muted);
+  letter-spacing: 0.04em;
+}
+
+/* Viewport do mockup */
+.nh-mockup-viewport {
+  height: 480px;
+  overflow: hidden;
+  position: relative;
+  background: #e8e6e0;
+  cursor: pointer;
+}
+
+.nh-mockup-screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Tags flutuantes sobre a mídia */
+.nh-prod-media-overlay-top {
+  position: absolute;
+  top: 70px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.nh-prod-media-status-tag,
+.nh-prod-media-nicho-tag {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  background: var(--nh-ink);
+  color: var(--nh-parchment);
+  border-radius: 1px;
+}
+
+.nh-prod-media-nicho-tag {
+  background: var(--nh-parchment);
+  color: var(--nh-ink);
+  border: 1px solid var(--nh-rule-accent);
+}
+
+/* Lado Direito - Detalhes e Conversão */
+.nh-prod-card-info {
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--nh-parchment-2);
+}
+
+.nh-prod-info-header {
+  margin-bottom: 24px;
+}
+
+.nh-prod-kicker {
+  display: block;
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+  margin-bottom: 12px;
+}
+
+.nh-prod-title {
+  font-family: var(--nh-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--nh-ink);
+  margin-bottom: 6px;
+}
+
+.nh-prod-subtitle {
+  font-size: 0.85rem;
+  color: var(--nh-ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.nh-prod-desc {
+  font-size: 0.92rem;
+  line-height: 1.72;
+  color: var(--nh-ink-secondary);
+  margin-bottom: 40px;
+}
+
+/* Tabela de Metadados */
+.nh-prod-meta-table {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  border-top: 1px solid var(--nh-rule);
+  border-bottom: 1px solid var(--nh-rule);
+  padding: 24px 0;
+  margin-bottom: 40px;
+}
+
+.nh-prod-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nh-prod-meta-label {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+}
+
+.nh-prod-meta-value {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--nh-ink);
+  letter-spacing: 0.02em;
+}
+
+/* Ações */
+.nh-prod-actions {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nh-prod-link {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nh-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--nh-ink-faint);
+  padding-bottom: 4px;
+  transition: border-color 0.3s;
+}
+
+.nh-prod-link:hover {
+  border-bottom-color: var(--nh-ink);
+}
+
+/* Fila de Navegação do Catálogo */
+.nh-prod-catalog-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.nh-prod-nav-btn {
+  background: transparent;
+  border: none;
+  border-top: 2px solid var(--nh-rule);
+  padding-top: 20px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  gap: 16px;
+  transition: border-color 0.4s var(--nh-ease);
+}
+
+.nh-prod-nav-btn.active {
+  border-top-color: var(--nh-ink);
+}
+
+.nh-prod-nav-idx {
+  font-family: var(--nh-serif);
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--nh-ink-faint);
+  transition: color 0.4s var(--nh-ease);
+  line-height: 1;
+}
+
+.nh-prod-nav-btn.active .nh-prod-nav-idx {
+  color: var(--nh-ink);
+}
+
+.nh-prod-nav-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nh-prod-nav-nicho {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+}
+
+.nh-prod-nav-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--nh-ink-muted);
+  transition: color 0.4s var(--nh-ease);
+}
+
+.nh-prod-nav-btn.active .nh-prod-nav-title {
+  color: var(--nh-ink);
+}
+
+/* ───────────────────────────────────────────────────────────
+   MODAL OVERLAY (ESTILO ACADEMY PASS)
+   ─────────────────────────────────────────────────────────── */
+.nh-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 9, 8, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px var(--nh-section-x);
+}
+
+.nh-modal-window {
+  background: var(--nh-parchment);
+  border: 1px solid var(--nh-rule-accent);
+  width: 100%;
+  max-width: 1100px;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 30px 90px rgba(10, 9, 8, 0.25);
+  animation: nhModalFadeIn 0.5s var(--nh-ease);
+}
+
+@keyframes nhModalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nh-modal-header {
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--nh-rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--nh-parchment);
+  z-index: 10;
+}
+
+.nh-modal-brand {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+}
+
+.nh-modal-close {
+  background: none;
+  border: none;
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--nh-ink);
+  cursor: pointer;
+  transition: opacity 0.3s;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.nh-modal-close:hover {
+  opacity: 0.7;
+}
+
+.nh-modal-content {
+  overflow-y: auto;
+  flex: 1;
+  background: var(--nh-parchment);
+}
+
+.nh-modal-banner {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.nh-modal-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.4);
+}
+
+.nh-modal-banner-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 48px;
+  background: linear-gradient(to top, rgba(10, 9, 8, 0.8) 0%, transparent 100%);
+  color: var(--nh-parchment);
+}
+
+.nh-modal-banner-tag {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 232, 0.7);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.nh-modal-banner-title {
+  font-family: var(--nh-serif);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 8px;
+}
+
+.nh-modal-banner-subtitle {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 232, 0.5);
+}
+
+.nh-modal-body {
+  padding: 64px 48px;
+}
+
+.nh-modal-grid {
+  display: grid;
+  grid-template-columns: 7fr 4fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.nh-modal-main {}
+
+.nh-modal-section {
+  margin-bottom: 48px;
+}
+
+.nh-modal-sec-title {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--nh-rule);
+  padding-bottom: 8px;
+}
+
+.nh-modal-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--nh-ink-secondary);
+}
+
+.nh-modal-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nh-modal-list-item {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  line-height: 1.68;
+  color: var(--nh-ink-secondary);
+}
+
+.nh-modal-list-bullet {
+  color: var(--nh-ink);
+  font-size: 7px;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.nh-modal-sidebar {
+  position: sticky;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.nh-modal-stat-card {
+  background: var(--nh-parchment-2);
+  border: 1px solid var(--nh-rule);
+  padding: 32px;
+}
+
+.nh-modal-stat-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.nh-modal-stat-val {
+  font-family: var(--nh-serif);
+  font-size: 2.6rem;
+  font-weight: 300;
+  color: var(--nh-ink);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.nh-modal-stat-desc {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--nh-ink-secondary);
+}
+
+.nh-modal-summary-box {
+  background: var(--nh-parchment-3);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nh-modal-sum-title {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nh-ink-muted);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--nh-rule);
+  padding-bottom: 8px;
+}
+
+.nh-modal-sum-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  border-bottom: 1px dashed var(--nh-rule);
+  padding-bottom: 10px;
+}
+
+.nh-modal-sum-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.nh-modal-sum-row span {
+  color: var(--nh-ink-muted);
+}
+
+.nh-modal-sum-row strong {
+  color: var(--nh-ink);
+  font-weight: 500;
+}
+
+.nh-modal-cta-box {
+  border-top: 1px solid var(--nh-rule-accent);
+  padding-top: 56px;
+  margin-top: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.nh-modal-cta-title {
+  font-family: var(--nh-serif);
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--nh-ink);
+  max-width: 650px;
+}
+
+.nh-modal-cta-text {
+  font-size: 0.95rem;
+  line-height: 1.72;
+  color: var(--nh-ink-muted);
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+/* ───────────────────────────────────────────────────────────
+   SEÇÃO 5 — METODOLOGIA / TRUST SIGNALS
+─────────────────────────────────────────────────────────── */
+.nh-trust {
+  background:    var(--nh-parchment-2);
+  padding:       var(--nh-section-y) 0;
+  border-bottom: 1px solid var(--nh-rule);
+}
+
+.nh-trust-inner {
+  display:               grid;
+  grid-template-columns: 5fr 7fr;
+  gap:                   120px;
+  align-items:           start;
+}
+
+.nh-trust-h2 {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(2.5rem, 4.5vw, 5rem);
+  line-height:    1.0;
+  letter-spacing: -0.025em;
+  color:          var(--nh-ink);
+}
+
+.nh-trust-h2 em {
+  font-style: italic;
+}
+
+.nh-trust-copy {
+  font-family:   var(--nh-sans);
+  font-size:     0.95rem;
+  line-height:   1.78;
+  color:         var(--nh-ink-muted);
+  margin-bottom: 64px;
+}
+
+/* Placeholders de logos — estética de relatório anual */
+.nh-trust-logos-label {
+  display:        block;
+  font-size:      9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  margin-bottom:  20px;
+}
+
+.nh-trust-logos {
+  display:               grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:                   1px;
+  background:            var(--nh-rule);
+}
+
+.nh-trust-logo-slot {
+  background:      var(--nh-parchment-2);
+  height:          72px;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  justify-content: center;
+  gap:             4px;
+}
+
+.nh-trust-logo-slot-label {
+  font-size:      8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  font-weight:    500;
+}
+
+.nh-trust-logo-slot-soon {
+  font-size:      7.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  opacity:        0.5;
+}
+
+/* ───────────────────────────────────────────────────────────
+   SEÇÃO 6 — FECHAMENTO / FORMULÁRIO DE QUALIFICAÇÃO
+─────────────────────────────────────────────────────────── */
+.nh-closing {
+  background: var(--nh-parchment-3);
+  padding:    var(--nh-section-y) 0;
+}
+
+.nh-closing-inner {
+  display:               grid;
+  grid-template-columns: 5fr 7fr;
+  gap:                   120px;
+  align-items:           start;
+}
+
+.nh-closing-h2 {
+  font-family:    var(--nh-serif);
+  font-weight:    300;
+  font-size:      clamp(2.5rem, 4.5vw, 5rem);
+  line-height:    1.0;
+  letter-spacing: -0.025em;
+  color:          var(--nh-ink);
+  margin-bottom:  32px;
+}
+
+.nh-closing-h2 em {
+  font-style: italic;
+}
+
+.nh-closing-copy {
+  font-family:   var(--nh-sans);
+  font-size:     0.9rem;
+  line-height:   1.75;
+  color:         var(--nh-ink-muted);
+  margin-bottom: 48px;
+}
+
+.nh-closing-scarcity {
+  padding:    24px;
+  border:     1px solid var(--nh-rule-accent);
+  background: var(--nh-parchment);
+}
+
+.nh-closing-scarcity-head {
+  font-size:      8.5px;
+  font-weight:    600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-secondary);
+  margin-bottom:  10px;
+  display:        block;
+}
+
+.nh-closing-scarcity p {
+  font-size:   0.78rem;
+  line-height: 1.65;
+  color:       var(--nh-ink-muted);
+}
+
+/* Formulário — sem backgrounds, sem bordas vistosas */
+.nh-form-title {
+  display:        block;
+  font-size:      9px;
+  font-weight:    600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-muted);
+  margin-bottom:  40px;
+  padding-bottom: 20px;
+  border-bottom:  1px solid var(--nh-rule);
+}
+
+.nh-field {
+  border-bottom: 1px solid var(--nh-rule);
+  transition:    border-color 0.3s ease;
+}
+
+.nh-field:focus-within {
+  border-bottom-color: var(--nh-ink-secondary);
+}
+
+.nh-field label {
+  display:        block;
+  font-size:      8.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color:          var(--nh-ink-faint);
+  padding-top:    22px;
+  transition:     color 0.3s ease;
+  font-weight:    500;
+}
+
+.nh-field:focus-within label {
+  color: var(--nh-ink-secondary);
+}
+
+.nh-field input,
+.nh-field select,
+.nh-field textarea {
+  width:       100%;
+  background:  transparent;
+  border:      none;
+  outline:     none;
+  color:       var(--nh-ink);
+  font-family: var(--nh-sans);
+  font-size:   0.9rem;
+  font-weight: 300;
+  padding:     10px 0 18px;
+  appearance:  none;
+  letter-spacing: 0.01em;
+}
+
+.nh-field select {
+  cursor:               pointer;
+  background-image:     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%230a0908' stroke-width='1' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:    no-repeat;
+  background-position:  right 0 center;
+  padding-right:        18px;
+}
+
+.nh-field select option {
+  background: var(--nh-parchment);
+  color:      var(--nh-ink);
+}
+
+.nh-field textarea { resize: none; min-height: 54px; }
+
+.nh-field input::placeholder,
+.nh-field textarea::placeholder {
+  color: var(--nh-ink-faint);
+}
+
+.nh-form-footer {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  margin-top:      40px;
+  padding-top:     32px;
+  border-top:      1px solid var(--nh-rule);
+}
+
+.nh-form-disclaimer {
+  font-size:   0.68rem;
+  line-height: 1.55;
+  color:       var(--nh-ink-faint);
+  max-width:   220px;
+}
+
+.nh-btn-submit {
+  display:         inline-flex;
+  align-items:     center;
+  gap:             14px;
+  background:      transparent;
+  border:          1px solid var(--nh-ink-secondary);
+  color:           var(--nh-ink-secondary);
+  font-family:     var(--nh-sans);
+  font-size:       9px;
+  font-weight:     600;
+  letter-spacing:  0.22em;
+  text-transform:  uppercase;
+  padding:         16px 32px;
+  cursor:          pointer;
+  transition:      background 0.4s var(--nh-ease), color 0.4s var(--nh-ease), border-color 0.4s var(--nh-ease);
+  /* Zero sombra. Zero glow. */
+}
+
+.nh-btn-submit:hover {
+  background:   var(--nh-ink);
+  color:        var(--nh-parchment);
+  border-color: var(--nh-ink);
+}
+
+.nh-btn-submit:disabled {
+  opacity: 0.5;
+  cursor:  not-allowed;
+}
+
+/* ───────────────────────────────────────────────────────────
+   FOOTER
+─────────────────────────────────────────────────────────── */
+.nh-footer {
+  background:  var(--nh-parchment);
+  border-top:  1px solid var(--nh-rule);
+  padding:     28px 0;
+}
+
+.nh-footer-inner {
+  max-width:       var(--nh-max-w);
+  margin:          0 auto;
+  padding:         0 var(--nh-section-x);
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+}
+
+
+/* ───────────────────────────────────────────────────────────
+   ESTADOS DE ANIMAÇÃO GSAP
+─────────────────────────────────────────────────────────── */
+.nh-reveal     { opacity: 0; transform: translateY(28px); }
+.nh-reveal-l   { opacity: 0; transform: translateX(-28px); }
+.nh-reveal-r   { opacity: 0; transform: translateX(28px); }
+
+/* ───────────────────────────────────────────────────────────
+   RESPONSIVO
+─────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  :root { --nh-section-y: 120px; }
+
+  .nh-hero-divider          { grid-template-columns: 1fr; gap: 40px; }
+  .nh-pain-body             { grid-template-columns: 1fr; gap: 60px; }
+  .nh-svc-card-inner        { grid-template-columns: 1fr; gap: 48px; }
+  .nh-trust-inner           { grid-template-columns: 1fr; gap: 64px; }
+  .nh-closing-inner         { grid-template-columns: 1fr; gap: 64px; }
+  .nh-portfolio-header      { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .nh-portfolio-tagline     { text-align: left; max-width: 100%; }
+  .nh-portfolio-caption     { grid-template-columns: 1fr; gap: 28px; }
+  .nh-hero-stats            { gap: 36px; }
+  .nh-footer-nav            { display: none; }
+
+  /* Responsivo — Catálogo & Modal */
+  .nh-prod-card             { grid-template-columns: 1fr; }
+  .nh-prod-card-media       { border-right: none; border-bottom: 1px solid var(--nh-rule-accent); }
+  .nh-prod-card-info        { padding: 48px; }
+  .nh-modal-grid            { grid-template-columns: 1fr; gap: 40px; }
+  .nh-modal-sidebar         { position: relative; top: 0; }
+  .nh-modal-window          { max-height: 92vh; width: 95vw; }
+}
+
+@media (max-width: 768px) {
+  :root { --nh-section-y: 80px; --nh-section-x: 24px; }
+
+  .nh-hero-h1               { font-size: clamp(3rem, 13vw, 5rem); }
+  .nh-hero-cta-row          { flex-direction: column; align-items: flex-start; gap: 28px; }
+  .nh-hero-scroll-signal    { display: none; }
+  .nh-hero-foot-notice      { display: none; }
+  .nh-argho-links           { display: none; }
+  .nh-trust-logos           { grid-template-columns: 1fr; }
+  .nh-form-footer           { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .nh-footer-bottom-inner   { flex-direction: column; gap: 8px; text-align: center; }
+  .nh-footer-topbar-inner   { flex-direction: column; gap: 20px; text-align: center; }
+  .nh-svc-card              { padding: 48px 0; }
+  .nh-svc-cta               { display: inline-flex; }
+
+  /* Responsivo — Catálogo & Modal Mobile */
+  .nh-prod-card-info        { padding: 32px 24px; }
+  .nh-prod-meta-table       { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .nh-prod-actions          { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .nh-prod-catalog-nav      { grid-template-columns: 1fr; gap: 16px; }
+  .nh-modal-body            { padding: 32px 24px; }
+  .nh-modal-banner          { height: 280px; }
+  .nh-modal-banner-overlay  { padding: 24px; }
+}

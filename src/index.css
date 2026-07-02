@@ -1,15 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Outfit:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@1,600;1,700&family=Inter:wght@300;400;500;700;900&family=Outfit:wght@300;400;700;900&display=swap');
+
+/* ── KALLISTO — Fonte principal de titulares ──────────────── */
+@font-face {
+  font-family: 'Kallisto';
+  src:
+    local('Kallisto Medium Italic'),
+    local('Kallisto-MediumItalic'),
+    url('/fonts/Kallisto-MediumItalic.woff2') format('woff2'),
+    url('/fonts/Kallisto-MediumItalic.otf')   format('opentype'),
+    url('/fonts/Kallisto-MediumItalic.ttf')   format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
 
 :root {
-  --bg-color: #000000;
-  --text-color: #ffffff;
-  --accent-color: #ffffff;
+  --bg-color:       #000000;
+  --text-color:     #ffffff;
+  --accent-color:   #ffffff;
+  --accent-lime:    #C5FF00;           /* IDENTIDADE — lime neon */
+  --accent-lime-dim: rgba(197,255,0,0.12);
   --secondary-color: #888888;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --font-main: 'Inter', sans-serif;
-  --font-heading: 'Outfit', sans-serif;
-  
+  --glass-bg:       rgba(255, 255, 255, 0.03);
+  --glass-border:   rgba(255, 255, 255, 0.08);
+
+  /* Tipografia — Kallisto como heading global */
+  --font-main:    'Inter', sans-serif;
+  --font-heading: 'Kallisto', 'Barlow Condensed', sans-serif;
+
   /* Spacing Tokens */
   --section-padding-x: 5%;
   --section-padding-y: 120px;
@@ -17,7 +35,7 @@
 
 /* GLOBAL RESET FOR BACKGROUND VISIBILITY */
 html {
-  background-color: #000 !important; /* Base fallback */
+  background-color: #000 !important;
 }
 
 * {
@@ -33,17 +51,23 @@ html, body {
 }
 
 body {
-  background-color: transparent !important; /* Must be transparent to see z-index: -1 */
+  background-color: transparent !important;
   color: var(--text-color);
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Headings globais: Kallisto Medium Italic ─────────────── */
 h1, h2, h3, h4 {
-  font-family: var(--font-heading);
+  font-family:  var(--font-heading);
+  font-style:   italic;
+  font-weight:  700;
   text-transform: uppercase;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
+
+
+
 
 .section {
   min-height: 100vh;
