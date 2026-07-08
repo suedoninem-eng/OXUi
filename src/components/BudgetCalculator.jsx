@@ -87,10 +87,44 @@ export default function BudgetCalculator() {
 
       <div className="calc-wrapper">
 
-        {/* Título */}
-        <div className="calc-title-pill">
-          <span>CALCULADORA DE ORÇAMENTO</span>
-          <span className="calc-title-accent">VÍDEO COM IA</span>
+        {/* Header: Título + Card de Contato */}
+        <div className="calc-header-row">
+          <div className="calc-title-pill">
+            <span>CALCULADORA DE ORÇAMENTO</span>
+            <span className="calc-title-accent">VÍDEO COM IA</span>
+          </div>
+
+          {/* Card de contato rápido */}
+          <div className="calc-contact-card">
+            <div className="calc-contact-card__top">
+              <span className="calc-contact-card__badge">
+                <span className="calc-contact-card__badge-dot" />
+                ATENDIMENTO DIRETO
+              </span>
+              <h3 className="calc-contact-card__title">
+                Tire suas dúvidas &amp; receba um
+                <span className="calc-contact-card__accent"> orçamento personalizado</span>
+              </h3>
+              <p className="calc-contact-card__desc">
+                Fale comigo no WhatsApp agora. Resposta rápida, sem enrolação.
+              </p>
+            </div>
+            <a
+              href="https://wa.me/5545998522258?text=Ol%C3%A1%20Sued%2C%20tenho%20algumas%20d%C3%BAvidas%20e%20gostaria%20de%20um%20or%C3%A7amento%20personalizado!"
+              target="_blank"
+              rel="noreferrer"
+              className="calc-contact-card__btn"
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="currentColor"/>
+                <path d="M10 0C4.477 0 0 4.477 0 10c0 1.845.5 3.57 1.37 5.05L0 20l5.09-1.34A9.954 9.954 0 0010 20c5.523 0 10-4.477 10-10S15.523 0 10 0zm0 18.182a8.182 8.182 0 01-4.17-1.14l-.299-.177-3.02.795.808-2.949-.194-.303A8.182 8.182 0 0110 1.818c4.512 0 8.182 3.67 8.182 8.182s-3.67 8.182-8.182 8.182z" fill="currentColor"/>
+              </svg>
+              Falar no WhatsApp agora
+              <svg className="calc-contact-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div className="calc-body">
@@ -133,13 +167,22 @@ export default function BudgetCalculator() {
                   aria-label="Duração do vídeo"
                 />
                 <div className="calc-slider-ticks">
-                  <span>15s</span>
-                  <span>30s</span>
-                  <span>1min</span>
-                  <span>2min</span>
-                  <span>3min</span>
-                  <span>5min</span>
-                  <span>10min</span>
+                  {[
+                    { label: '15s',  val: 15  },
+                    { label: '30s',  val: 30  },
+                    { label: '1min', val: 60  },
+                    { label: '2min', val: 120 },
+                    { label: '3min', val: 180 },
+                    { label: '5min', val: 300 },
+                    { label: '10min',val: 600 },
+                  ].map(({ label, val }) => (
+                    <span
+                      key={val}
+                      style={{ left: `${((val - 15) / (600 - 15)) * 100}%` }}
+                    >
+                      {label}
+                    </span>
+                  ))}
                 </div>
               </div>
 

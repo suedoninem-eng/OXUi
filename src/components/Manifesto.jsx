@@ -1,19 +1,68 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+// GLB carregado de forma lazy — Three.js só baixa quando necessário
+const FloatingGLB = lazy(() => import('./FloatingGLB'))
+
 const Manifesto = () => {
   const canvasRef = useRef(null)
   const sectionRef = useRef(null)
+  const exitRef   = useRef(null)   // ref para o parágrafo onde o GLB deve sumir
   const frameCount = 16
   const images = useRef([])
   const airpods = useRef({ frame: 0 })
 
+  const [isMobile, setIsMobile]       = useState(false)
+  const [glbVisible, setGlbVisible]   = useState(false)
+
   const currentFrame = index => (
     `/assets/NOVAANIMACAO/FRAME ${index + 1}.webp`
   )
+
+  // Mobile check — não carrega Three.js no mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // GLB: aparece quando o Manifesto entra, some quando o parágrafo final do Process aparece
+  useEffect(() => {
+    const observers = []
+
+    if (sectionRef.current) {
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setGlbVisible(true) },
+        { threshold: 0.15 }
+      )
+      obs.observe(sectionRef.current)
+      observers.push(obs)
+    }
+
+    // O parágrafo de saída fica no ProcessSection — buscamos pelo ID que vamos adicionar
+    const checkExit = () => {
+      const exitEl = document.getElementById('process-exit-para')
+      if (exitEl) {
+        const obs2 = new IntersectionObserver(
+          ([entry]) => { if (entry.isIntersecting) setGlbVisible(false) },
+          { threshold: 0.3 }
+        )
+        obs2.observe(exitEl)
+        observers.push(obs2)
+      }
+    }
+    // Aguarda o DOM estar pronto
+    const t = setTimeout(checkExit, 500)
+
+    return () => {
+      clearTimeout(t)
+      observers.forEach(o => o.disconnect())
+    }
+  }, [])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -65,14 +114,13 @@ const Manifesto = () => {
     updateCanvasSize()
     window.addEventListener('resize', updateCanvasSize)
 
-    // GSAP Scroll Animation - Shared across sections
-    // We target the current section but end at the end of the next section
+    // GSAP Scroll Animation — começa nos cards, termina ao fim do Process
     const st = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      endTrigger: '.process-section', // End at the end of methodology
+      trigger: '#servicos',         // inicia ao entrar nos cards
+      start: 'top 85%',
+      endTrigger: '.process-section',
       end: 'bottom bottom',
-      scrub: 1, // Smooth scrub
+      scrub: 1,
       onUpdate: (self) => {
         const frameIndex = Math.floor(self.progress * (frameCount - 1))
         if (airpods.current.frame !== frameIndex) {
@@ -82,14 +130,14 @@ const Manifesto = () => {
       }
     })
 
-    // Opacity control for the fixed background
+    // Opacity control — aparece desde os cards (acima do manifesto)
     gsap.set(canvas, { opacity: 0 })
     gsap.to(canvas, {
       opacity: 1,
       scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top 80%',
-        end: 'top top',
+        trigger: '#servicos',     // começa a aparecer nos cards
+        start: 'top 85%',
+        end: 'top 30%',
         scrub: true
       }
     })
@@ -111,24 +159,23 @@ const Manifesto = () => {
 
     return () => {
       window.removeEventListener('resize', updateCanvasSize)
-      st.kill()
-      ScrollTrigger.getAll().forEach(st => st.kill())
+      st.kill()  // mata APENAS o trigger do Manifesto, não todos
     }
   }, [])
 
   return (
     <section 
       ref={sectionRef}
-      className="section manifesto" 
+      className="section manifesto manifesto-section" 
       style={{ 
         position: 'relative',
         padding: '0',
-        background: 'transparent', // Transparent to see shared background
+        background: 'transparent',
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        zIndex: 1
+        zIndex: 10,
       }}
     >
       {/* Fixed Background Canvas - shared across Manifesto and ProcessSection */}
@@ -180,6 +227,13 @@ const Manifesto = () => {
           </p>
         </div>
       </div>
+
+      {/* ── GLB Mascote flutuante — desktop only ── */}
+      {!isMobile && (
+        <Suspense fallback={null}>
+          <FloatingGLB visible={glbVisible} />
+        </Suspense>
+      )}
 
       <style>{`
         @media (max-width: 1024px) {

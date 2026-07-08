@@ -24,7 +24,9 @@ const CustomHeroBanner = () => {
         alignItems: 'center', 
         overflow: 'hidden', 
         position: 'relative', 
-        background: 'transparent'
+        background: 'transparent',
+        zIndex: 10,
+        paddingBottom: '120px',
       }}
     >
       {/* REVEAL BACKGROUND LAYER */}
@@ -87,9 +89,6 @@ const CustomHeroBanner = () => {
         </div>
       </div>
       
-      <div style={{ position: 'absolute', bottom: '40px', fontSize: '0.7rem', letterSpacing: '0.4em', opacity: 0.5, fontFamily: "'Outfit', sans-serif", zIndex: 1 }}>
-        SCROLL TO EXPLORE
-      </div>
     </section>
   )
 }

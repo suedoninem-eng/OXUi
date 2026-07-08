@@ -58,9 +58,9 @@ const ProcessSection = () => {
       style={{ 
         minHeight: '120vh', 
         padding: '120px 5%',
-        background: 'transparent', // Explicitly transparent
+        background: 'transparent',
         position: 'relative',
-        zIndex: 2 // Above the fixed background
+        zIndex: 15
       }}
     >
       <div className="process-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(250px, 1fr) 2fr', gap: '100px' }}>
@@ -94,7 +94,7 @@ const ProcessSection = () => {
             IMERSIVO<br/>POR NATUREZA
           </h2>
           
-          <div style={{ marginTop: '100px', maxWidth: '600px' }}>
+          <div id="process-exit-para" style={{ marginTop: '100px', maxWidth: '600px' }}>
             <p style={{ fontSize: '1.5rem', lineHeight: 1.4, color: '#888', fontWeight: 300 }}>
               Não apenas construímos sites. Criamos ecossistemas que respiram, reagem e evoluem com a narrativa da sua marca.
             </p>

@@ -90,43 +90,46 @@ const ScrollBackgroundAnimation = () => {
     ScrollTrigger.refresh()
 
     const ctx = gsap.context(() => {
-      // Hide initially and only show when relevant
+      // Escondido até chegar na seção TRUSTED BY
       gsap.set(canvasRef.current, { 
         opacity: 0,
         visibility: 'hidden'
       })
 
-      // Animation: sync frames from the moment Services (Soluções) appears
+      // Frames sincronizados: começa no TRUSTED BY e vai até o fim da página
       ScrollTrigger.create({
-        trigger: '.services',
-        start: 'top bottom',
+        trigger: '.testimonials',
+        start: 'top center',        // inicia quando o TRUSTED BY chega ao centro da tela
         endTrigger: 'html',
         end: 'bottom bottom',
         scrub: true,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          // Only render if significantly visible (optimization)
-          if (self.progress > 0) {
-            const frameIndex = Math.floor(self.progress * (frameCount - 1))
-            if (animationState.current.frame !== frameIndex) {
-              animationState.current.frame = frameIndex
-              render()
-            }
+          const frameIndex = Math.floor(self.progress * (frameCount - 1))
+          if (animationState.current.frame !== frameIndex) {
+            animationState.current.frame = frameIndex
+            render()
           }
         }
       })
 
-      // Fade in effect
+      // Fade in suave ao entrar no TRUSTED BY
       gsap.to(canvasRef.current, {
         opacity: 1,
         visibility: 'visible',
+        duration: 0.3,
         scrollTrigger: {
-          trigger: '.services',
-          start: 'top bottom',
-          end: 'top 30%',
+          trigger: '.testimonials',
+          start: 'top 80%',         // começa a aparecer antes de chegar
+          end: 'top center',
           scrub: true,
           onEnter: () => gsap.set(canvasRef.current, { visibility: 'visible' }),
-          onLeaveBack: () => gsap.set(canvasRef.current, { visibility: 'hidden' })
+          onLeaveBack: () => {
+            gsap.set(canvasRef.current, { opacity: 0, visibility: 'hidden' })
+            // Reseta para frame 0 ao sair
+            animationState.current.frame = 0
+            render()
+          }
         }
       })
     })

@@ -156,12 +156,13 @@ export default function VideoIA() {
       <section className="via-hero">
         <div className="via-hero__bg">
           <video 
-            src="/via-hero-bg-fast.mp4" 
+            src="/conteudospaginaia/0701 (1).webm" 
             poster="/via-hero-poster.jpg"
             autoPlay 
             loop 
             muted 
-            playsInline 
+            playsInline
+            preload="metadata"
             className="via-hero__bg-video" 
             aria-hidden="true"
           />
@@ -248,15 +249,15 @@ export default function VideoIA() {
 
           {/* Slides 2 a 10: Vídeos da Campanha e Carrossel */}
           {[
-            "/BRANDINGAURORA.mp4",
-            "/conteudospaginaia/vdcarrossel/0613 (2).mp4",
-            "/conteudospaginaia/vdcarrossel/AMITTI COM AUDIO.mp4",
-            "/conteudospaginaia/vdcarrossel/BORBELTINHA COM AMOR.mp4",
-            "/conteudospaginaia/vdcarrossel/JANEIRO GRATIDÃO.mp4",
-            "/conteudospaginaia/vdcarrossel/VT DE NTAL.mp4",
-            "/conteudospaginaia/vdcarrossel/envato_video_gen_Jan_16_2026_11_23_07.mp4",
-            "/conteudospaginaia/vdcarrossel/envato_video_gen_Jan_16_2026_20_16_24.mp4",
-            "/conteudospaginaia/vdcarrossel/interpreise.mp4"
+            "/conteudospaginaia/BRANDINGAURORA.webm",
+            "/conteudospaginaia/vdcarrossel/0613-_2_.webm",
+            "/conteudospaginaia/vdcarrossel/AMITTI-COM-AUDIO.webm",
+            "/conteudospaginaia/vdcarrossel/BORBELTINHA-COM-AMOR.webm",
+            "/conteudospaginaia/vdcarrossel/JANEIRO-GRATIDÃO.webm",
+            "/conteudospaginaia/vdcarrossel/VT-DE-NTAL.webm",
+            "/conteudospaginaia/vdcarrossel/envato_video_gen_Jan_16_2026_11_23_07.webm",
+            "/conteudospaginaia/vdcarrossel/envato_video_gen_Jan_16_2026_20_16_24.webm",
+            "/conteudospaginaia/vdcarrossel/interpreise.webm"
           ].map((videoSrc, index) => (
             <div className="via-track-item via-video-slide" key={index}>
               <VideoCard src={videoSrc} />

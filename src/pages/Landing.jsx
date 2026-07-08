@@ -55,11 +55,11 @@ function Landing() {
   return (
     <div className="landing-container">
       <CustomHeroBanner />
+      <Services />
       <Manifesto />
       <ProcessSection />
       <WorkGallery />
       <KineticGrid />
-      <Services />
       <ScrollBackgroundAnimation />
       <Testimonials />
       <CTA />

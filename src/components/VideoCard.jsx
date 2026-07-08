@@ -6,17 +6,20 @@ export default function VideoCard({ src }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Auto-play / pause based on intersection with viewport
+  // Auto-play / pause + lazy src based on intersection with viewport
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           if (videoRef.current) {
+            // Lazy: só atribui o src quando entra na tela
+            if (!videoRef.current.src || videoRef.current.src === window.location.href) {
+              videoRef.current.src = src;
+              videoRef.current.load();
+            }
             videoRef.current.play().then(() => {
               setIsPlaying(true);
-            }).catch(() => {
-              // Auto-play might be blocked by browser policy
-            });
+            }).catch(() => {});
           }
         } else {
           if (videoRef.current) {
@@ -25,7 +28,7 @@ export default function VideoCard({ src }) {
           }
         }
       });
-    }, { threshold: 0.5 }); // Play when 50% visible
+    }, { threshold: 0.3, rootMargin: '100px' });
 
     if (videoRef.current) {
       observer.observe(videoRef.current);
@@ -36,7 +39,7 @@ export default function VideoCard({ src }) {
         observer.unobserve(videoRef.current);
       }
     };
-  }, []);
+  }, [src]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -58,7 +61,7 @@ export default function VideoCard({ src }) {
     <div className="via-mosaic-video-wrapper">
       <video 
         ref={videoRef}
-        src={src}
+        preload="none"
         loop
         muted={isMuted}
         playsInline
