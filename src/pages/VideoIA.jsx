@@ -158,7 +158,7 @@ export default function VideoIA() {
         <div className="via-hero__bg">
           <video 
             src="/conteudospaginaia/0701_superopt.mp4" 
-            poster="/via-hero-poster.jpg"
+            poster="/via-hero-poster.webp"
             autoPlay 
             loop 
             muted 
