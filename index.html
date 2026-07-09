@@ -1,35 +1,53 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-N823WJJX');</script>
-    <!-- End Google Tag Manager -->
+    <link rel="preload" as="image" href="/via-hero-poster.jpg" fetchpriority="high" />
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;700;900&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;700;900&family=Syncopate:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;700;900&family=Syncopate:wght@400;700&display=swap"></noscript>
     <title>OXUI | Immersive Design Ecosystem</title>
+    <meta name="description" content="Descubra a OXUI: um ecossistema imersivo de design liderado por Sued Oninem, unindo inovação, vídeos com IA e branding de alto impacto." />
 
-    <!-- Meta Pixel Code -->
+    <!-- Deferred Analytics Scripts -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1736853567444721');
-    fbq('track', 'PageView');
+      (function() {
+        var fired = false;
+        function loadAnalytics() {
+          if (fired) return;
+          fired = true;
+          // Google Tag Manager
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-N823WJJX');
+          // Facebook Pixel
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1736853567444721');
+          fbq('track', 'PageView');
+          // Remove event listeners
+          window.removeEventListener('scroll', loadAnalytics, {passive: true});
+          window.removeEventListener('mousemove', loadAnalytics, {passive: true});
+          window.removeEventListener('touchstart', loadAnalytics, {passive: true});
+        }
+        window.addEventListener('scroll', loadAnalytics, {passive: true});
+        window.addEventListener('mousemove', loadAnalytics, {passive: true});
+        window.addEventListener('touchstart', loadAnalytics, {passive: true});
+        setTimeout(loadAnalytics, 3000); // Fallback: load after 3 seconds anyway
+      })();
     </script>
-    <!-- End Meta Pixel Code -->
+    <!-- End Deferred Analytics Scripts -->
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

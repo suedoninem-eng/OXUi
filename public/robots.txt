@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ecosistema-oxui.vercel.app/sitemap.xml

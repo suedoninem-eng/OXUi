@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import './VideoIA.css'
 import VideoCard from '../components/VideoCard'
-import EcosystemSection from '../components/EcosystemSection'
-import BudgetCalculator from '../components/BudgetCalculator'
 import { gsap } from 'gsap'
+
+const EcosystemSection = lazy(() => import('../components/EcosystemSection'))
+const BudgetCalculator = lazy(() => import('../components/BudgetCalculator'))
 
 // Importação dinâmica: o Three.js só será baixado se o componente for montado
 const FloatingGLB = lazy(() => import('../components/FloatingGLB'))
@@ -156,7 +157,7 @@ export default function VideoIA() {
       <section className="via-hero">
         <div className="via-hero__bg">
           <video 
-            src="/conteudospaginaia/0701 (1).webm" 
+            src="/conteudospaginaia/0701_superopt.mp4" 
             poster="/via-hero-poster.jpg"
             autoPlay 
             loop 
@@ -184,6 +185,8 @@ export default function VideoIA() {
               src="/fotoiconsued.avif" 
               alt="Sued Oninem" 
               className="via-hero__author-avatar" 
+              width="48"
+              height="48"
             />
             <div className="via-hero__author-info">
               <strong>Sued Oninem</strong>
@@ -206,25 +209,25 @@ export default function VideoIA() {
         {/* Fundo Original Mosaico (Fade Out) */}
         <div className="via-mosaic-bg">
           {[
-            "magnific_a-familia-esta-indo-para-_rlM03f4xtc.png",
-            "magnific_a-familia-esta-indo-para-_ubAR9U9QLD.png",
-            "magnific_a-mulher-e-o-homem-da-fam_kLTzfp016B.png",
-            "magnific_agora-esse-menino-esta-de_CHZNFU7EEy.png",
-            "magnific_crie-um-angulo-diferente-_J9m8ZPKOq4.png",
-            "magnific_crie-um-foto-macro-de-um-_y6vIpkaPW9.png",
-            "magnific_macro-na-menina-rindo_DBSj2vTpcl.png",
-            "magnific_mude-o-angulo-que-esta-se_y6vtOoFPW9.png",
-            "magnific_o-homem-da-familia-esta-i_xgDcT0djfW.png",
-            "magnific_o-homem-da-familia-img1-e_vui3djia47.png",
-            "magnific_refaca-essa-cena-sendo-fi_NZEaOtS6D9.png",
-            "magnific_a-familia-esta-indo-para-_ubAR9U9QLD.png",
-            "magnific_crie-um-angulo-diferente-_J9m8ZPKOq4.png",
-            "magnific_macro-na-menina-rindo_DBSj2vTpcl.png",
-            "magnific_mude-o-angulo-que-esta-se_y6vtOoFPW9.png",
-            "magnific_o-homem-da-familia-esta-i_xgDcT0djfW.png"
+            "magnific_a-familia-esta-indo-para-_rlM03f4xtc.webp",
+            "magnific_a-familia-esta-indo-para-_ubAR9U9QLD.webp",
+            "magnific_a-mulher-e-o-homem-da-fam_kLTzfp016B.webp",
+            "magnific_agora-esse-menino-esta-de_CHZNFU7EEy.webp",
+            "magnific_crie-um-angulo-diferente-_J9m8ZPKOq4.webp",
+            "magnific_crie-um-foto-macro-de-um-_y6vIpkaPW9.webp",
+            "magnific_macro-na-menina-rindo_DBSj2vTpcl.webp",
+            "magnific_mude-o-angulo-que-esta-se_y6vtOoFPW9.webp",
+            "magnific_o-homem-da-familia-esta-i_xgDcT0djfW.webp",
+            "magnific_o-homem-da-familia-img1-e_vui3djia47.webp",
+            "magnific_refaca-essa-cena-sendo-fi_NZEaOtS6D9.webp",
+            "magnific_a-familia-esta-indo-para-_ubAR9U9QLD.webp",
+            "magnific_crie-um-angulo-diferente-_J9m8ZPKOq4.webp",
+            "magnific_macro-na-menina-rindo_DBSj2vTpcl.webp",
+            "magnific_mude-o-angulo-que-esta-se_y6vtOoFPW9.webp",
+            "magnific_o-homem-da-familia-esta-i_xgDcT0djfW.webp"
           ].map((img, i) => (
             <div key={i} className="via-mosaic-tile">
-              <img src={`/moodboard/${img}`} alt="" loading="lazy" />
+              <img src={`/moodboard/${img}`} alt="" loading="lazy" width="280" height="280" />
             </div>
           ))}
         </div>
@@ -270,12 +273,16 @@ export default function VideoIA() {
       {/* ══════════════════════════════════════════════════════════════
           ECOSSISTEMA DIGITAL (Cards 3D e Glassmorphism)
       ══════════════════════════════════════════════════════════════ */}
-      <EcosystemSection isMobile={isMobile} />
+      <Suspense fallback={<div style={{height: '100vh'}} />}>
+        <EcosystemSection isMobile={isMobile} />
+      </Suspense>
 
       {/* ══════════════════════════════════════════════════════════════
           CALCULADORA DE ORÇAMENTO
       ══════════════════════════════════════════════════════════════ */}
-      <BudgetCalculator />
+      <Suspense fallback={<div style={{height: '100vh'}} />}>
+        <BudgetCalculator />
+      </Suspense>
 
       {/* ══════════════════════════════════════════════════════════════
           CALL TO ACTION FINAL

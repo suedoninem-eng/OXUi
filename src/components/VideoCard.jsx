@@ -12,14 +12,18 @@ export default function VideoCard({ src }) {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           if (videoRef.current) {
-            // Lazy: só atribui o src quando entra na tela
-            if (!videoRef.current.src || videoRef.current.src === window.location.href) {
-              videoRef.current.src = src;
-              videoRef.current.load();
+            // Lazy: só atribui o src quando entra na tela DE FATO (coordenadas reais)
+            const rect = videoRef.current.getBoundingClientRect();
+            // Verifica se está dentro da largura da janela, pois o scroll é horizontal
+            if (rect.left < window.innerWidth && rect.right > 0) {
+              if (!videoRef.current.src || videoRef.current.src === window.location.href) {
+                videoRef.current.src = src;
+                videoRef.current.load();
+              }
+              videoRef.current.play().then(() => {
+                setIsPlaying(true);
+              }).catch(() => {});
             }
-            videoRef.current.play().then(() => {
-              setIsPlaying(true);
-            }).catch(() => {});
           }
         } else {
           if (videoRef.current) {
@@ -28,7 +32,7 @@ export default function VideoCard({ src }) {
           }
         }
       });
-    }, { threshold: 0.3, rootMargin: '100px' });
+    }, { threshold: 0.5, rootMargin: '0px' });
 
     if (videoRef.current) {
       observer.observe(videoRef.current);
