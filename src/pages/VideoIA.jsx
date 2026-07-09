@@ -38,6 +38,12 @@ export default function VideoIA() {
 
   // Controla visibilidade do mascote 3D (só na seção Design-Driven)
   const [mascoteVisible, setMascoteVisible] = useState(false)
+  const [load3D, setLoad3D] = useState(false)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoad3D(true), 3000)
+    return () => clearTimeout(timer)
+  }, [])
 
   // Intersection Observer original
   useEffect(() => {
@@ -142,7 +148,7 @@ export default function VideoIA() {
   return (
     <div className="via-page">
       {/* ── Mascote 3D flutuante (Apenas no Desktop via Lazy Load) ── */}
-      {!isMobile && (
+      {(!isMobile && load3D) && (
         <Suspense fallback={null}>
           <FloatingGLB visible={mascoteVisible} />
         </Suspense>

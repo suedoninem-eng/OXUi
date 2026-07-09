@@ -137,5 +137,5 @@ export default function FloatingGLB({ visible = true }) {
   return createPortal(content, document.body);
 }
 
-useGLTF.preload(MASCOTE_PATH);
+
 
